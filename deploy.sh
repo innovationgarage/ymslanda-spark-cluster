@@ -33,7 +33,7 @@ EOF
     depends_on:
       - spark-master
     ports:
-      - "$port:$port"
+      - "$port:8081"
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
 EOF
