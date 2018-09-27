@@ -22,6 +22,9 @@ services:
       - "7077:7077"
     environment:
       - INIT_DAEMON_STEP=setup_spark
+      - PYSPARK_PYTHON=${PYSPARK_PYTHON_VERSION}
+    volumes:
+      - /ymslanda:/ymslanda
 EOF
 
     for ((idx=1;idx<=SIZE;idx++)); do
@@ -36,6 +39,9 @@ EOF
       - "$port:8081"
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
+      - PYSPARK_PYTHON=${PYSPARK_PYTHON_VERSION}
+    volumes:
+      - /ymslanda:/ymslanda
 EOF
     done  
 } > docker-compose.yml
