@@ -23,6 +23,8 @@ services:
     environment:
       INIT_DAEMON_STEP: setup_spark
       SPARK_PUBLIC_DNS: ymslanda.innovationgarage.tech
+    volumes:
+      - /ymslanda:/ymslanda
 EOF
 
     for ((idx=1;idx<=SIZE;idx++)); do
@@ -39,6 +41,8 @@ EOF
       SPARK_MASTER: "spark://spark-master:7077"
       SPARK_WORKER_WEBUI_PORT: "$port"
       SPARK_PUBLIC_DNS: ymslanda.innovationgarage.tech
+    volumes:
+      - /ymslanda:/ymslanda
 EOF
     done  
 } > docker-compose.yml
