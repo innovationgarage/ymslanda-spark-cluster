@@ -21,7 +21,8 @@ services:
       - "8080:8080"
       - "7077:7077"
     environment:
-      - INIT_DAEMON_STEP=setup_spark
+      INIT_DAEMON_STEP: setup_spark
+      SPARK_PUBLIC_DNS: ymslanda.innovationgarage.tech
 EOF
 
     for ((idx=1;idx<=SIZE;idx++)); do
@@ -33,9 +34,11 @@ EOF
     depends_on:
       - spark-master
     ports:
-      - "$port:8081"
+      - "$port:$port"
     environment:
-      - "SPARK_MASTER=spark://spark-master:7077"
+      SPARK_MASTER: "spark://spark-master:7077"
+      SPARK_WORKER_WEBUI_PORT: "$port"
+      SPARK_PUBLIC_DNS: ymslanda.innovationgarage.tech
 EOF
     done  
 } > docker-compose.yml
